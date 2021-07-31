@@ -9,9 +9,10 @@ This app helps you send your emails to other emails very quickly
 
 ## Technologies
 Golang ver 1.6
+download go from https://golang.org/dl/
 	
 ## Setup
-for setup this program you should install go progrmmaing language from golang.com
+for setup this program you should install go progrmmaing language from https://golang.org/dl/
 then make sure you have set up third-party access email clinet
 
 ## usage
