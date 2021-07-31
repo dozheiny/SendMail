@@ -18,11 +18,11 @@ then make sure you have set up third-party access email clinet
 ## usage
 this is the usage :
 ```
-go run [your email] [your email text file address] [your email password] [message you want to send] 
+go run main.go [your email] [your email text file address] [your email password] [message you want to send] 
 ```
 example :
 ```
-go run "microsoft.apple@gmail.com" "C:/Users/Public/nsfw/emails.txt" "12345678" "i hate iran, this country make me sick"
+go run main.go "microsoft.apple@gmail.com" "C:/Users/Public/nsfw/emails.txt" "12345678" "i hate iran, this country make me sick"
 ```
 
 Have Fun :) !
