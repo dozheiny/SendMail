@@ -8,11 +8,11 @@ import (
 	"os"
 )
 
-func Send(from string, to []string, password string, message string) {
+// smtp host configuration.
+const smtpHost = "smtp.gmail.com"
+const smtpPort = "587"
 
-	// smtp host configuration
-	smtpHost := "smtp.gmail.com"
-	smtpPort := "587"
+func Send(from string, to []string, password string, message string) {
 
 	// Authentication.
 	auth := smtp.PlainAuth("", from, password, smtpHost)
@@ -20,7 +20,7 @@ func Send(from string, to []string, password string, message string) {
 	// Sending Email
 	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, []byte(message))
 	if err != nil {
-		fmt.Println("Error sending mail:", err)
+		log.Fatal("Error sending mail:", err)
 	} else {
 		fmt.Println("Email Sent !")
 	}
@@ -29,16 +29,18 @@ func Send(from string, to []string, password string, message string) {
 func main() {
 
 	// get command line arguments
-	from := os.Args[1]
-	path := os.Args[2]
-	password := os.Args[3]
-	message := os.Args[4]
+	var arguments = make(map[string]string)
+	arguments["from"] = os.Args[1]
+	arguments["path"] = os.Args[2]
+	arguments["password"] = os.Args[3]
+	arguments["message"] = os.Args[4]
 
 	// read .txt file to read and send emails
-	readFile, err := os.Open(path)
+	readFile, err := os.Open(arguments["path"])
 	if err != nil {
-		log.Fatal("Failed to open file: %s", err)
+		log.Fatal("Failed to open file: ", err)
 	}
+	defer readFile.Close()
 
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
@@ -47,8 +49,7 @@ func main() {
 	for fileScanner.Scan() {
 		fileTextLines = append(fileTextLines, fileScanner.Text())
 	}
-	Send(from, fileTextLines, password, message)
 
-	defer readFile.Close()
+	Send(arguments["from"], fileTextLines, arguments["password"], arguments["message"])
 
 }
