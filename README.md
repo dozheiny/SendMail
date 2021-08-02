@@ -5,7 +5,7 @@
 * [usage](#usage)
 
 ## General info
-This app helps you send your emails to other emails very quickly
+This program helps you send your emails to other emails very quickly
 
 ## Technologies
 Golang ver 1.6
